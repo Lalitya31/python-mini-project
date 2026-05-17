@@ -1,13 +1,21 @@
 :root {
     --accent-color: #7c5cff;
+    --primary-color: var(--accent-color);
+    --secondary-color: #06b6d4;
     --success-color: #10b981;
     --danger-color: #ef4444;
     --warning-color: #f59e0b;
     --bg-color: #081120;
     --surface-color: #111827;
+    --panel-color: #0f172a;
+    --control-color: #172033;
     --text-color: #e5e7eb;
     --text-secondary: #94a3b8;
     --border-color: #1f2937;
+    --accent-soft: rgba(124, 92, 255, 0.14);
+    --accent-border: rgba(124, 92, 255, 0.35);
+    --overlay-color: rgba(8, 17, 32, 0.78);
+    --on-accent: #ffffff;
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     --shadow-modal: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -20,11 +28,16 @@ html {
 }
 
 [data-theme="light"] {
-    --bg-color: #ffffff;
-    --surface-color: #f3f4f6;
+    --bg-color: #f8fafc;
+    --surface-color: #ffffff;
+    --panel-color: #f1f5f9;
+    --control-color: #ffffff;
     --text-color: #1f2937;
     --text-secondary: #6b7280;
-    --border-color: #d1d5db;
+    --border-color: #d8dee8;
+    --accent-soft: rgba(124, 92, 255, 0.1);
+    --accent-border: rgba(124, 92, 255, 0.26);
+    --overlay-color: rgba(15, 23, 42, 0.46);
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     --shadow-modal: 0 25px 50px -12px rgba(15, 23, 42, 0.18);
 }
@@ -56,13 +69,13 @@ body {
 
 /* Navbar */
 .navbar {
-    background: #111827cc;
+    background: color-mix(in srgb, var(--surface-color) 86%, transparent);
     backdrop-filter: blur(8px);
     padding: 1.25rem 0;
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .navbar .container {
@@ -85,7 +98,7 @@ body {
 
 .navbar-tagline {
     font-size: 0.875rem;
-    color: #94a3b8;
+    color: var(--text-secondary);
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 500;
     letter-spacing: 0.025em;
@@ -95,7 +108,7 @@ body {
 
 .logo h1 {
     font-size: 1.5rem;
-    color: #e0e7ff;
+    color: var(--text-color);
     font-family: 'IBM Plex Mono', monospace;
     font-weight: 600;
     letter-spacing: 0.5px;
@@ -109,7 +122,7 @@ body {
     font-family: 'IBM Plex Mono', monospace;
     font-weight: 400;
     font-size: 1.1rem;
-    color: #cbd5e1;
+    color: var(--text-secondary);
     letter-spacing: 0.02em;
 }
 
@@ -117,14 +130,14 @@ body {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
     font-size: 1.3rem;
-    color: #e0e7ff;
+    color: var(--text-color);
     margin: 0 0.15rem;
 }
 
 .logo-parens {
     font-family: 'IBM Plex Mono', monospace;
     font-weight: 600;
-    color: #7c5cff;
+    color: var(--accent-color);
     font-size: 1.1rem;
     margin-left: 0.1rem;
 }
@@ -139,7 +152,7 @@ body {
 .sound-toggle {
     background: var(--accent-color);
     border: none;
-    color: white;
+    color: var(--on-accent);
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -171,7 +184,7 @@ body {
     padding: 5rem 0;
     text-align: center;
     overflow: hidden;
-    background: #0b1020;
+    background: var(--bg-color);
 }
 
 .hero-background {
@@ -180,10 +193,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, 
-        rgba(124, 92, 255, 0.08) 0%,
-        rgba(124, 92, 255, 0.04) 50%,
-        rgba(124, 92, 255, 0.02) 100%);
+    background: linear-gradient(135deg, var(--accent-soft) 0%, transparent 100%);
     pointer-events: none;
     z-index: 0;
 }
@@ -271,7 +281,7 @@ body {
 }
 
 .feature-badge.active .feature-label {
-    color: white;
+    color: var(--on-accent);
 }
 
 .feature-badge:hover {
@@ -292,7 +302,7 @@ body {
 
 .btn-explore {
     background: var(--accent-color);
-    color: white;
+    color: var(--on-accent);
     border: none;
     padding: 1rem 2.5rem;
     font-size: 1.1rem;
@@ -369,6 +379,73 @@ body {
     z-index: 1;
 }
 
+/* ===== THEMED COMPONENTS ===== */
+.project-content,
+.ui-panel {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    color: var(--text-color);
+    box-shadow: var(--shadow);
+}
+
+.project-content {
+    padding: 1.5rem;
+}
+
+.ui-subpanel {
+    background: var(--panel-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--text-color);
+}
+
+.ui-stat,
+.score-box,
+.score-card {
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-border);
+    border-radius: 10px;
+    color: var(--text-color);
+}
+
+.ui-button,
+.game-btn,
+.control-btn,
+.btn-primary {
+    background: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    border-radius: 10px;
+    color: var(--on-accent);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.ui-button:hover,
+.game-btn:hover,
+.control-btn:hover,
+.btn-primary:hover {
+    box-shadow: 0 8px 24px rgba(124, 92, 255, 0.28);
+    transform: translateY(-2px);
+}
+
+.ui-input {
+    background: var(--control-color);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-color);
+    font-family: inherit;
+}
+
+.ui-canvas-frame {
+    background: var(--panel-color);
+    border: 2px solid var(--accent-border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
 /* ===== MODERN SEARCH BAR ===== */
 .search-section {
     position: relative;
@@ -386,45 +463,35 @@ body {
     height: 56px;
 
     /* Glassmorphism: Blur effect with fallback */
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(39, 51, 76, 0.7) 100%);
+    background: color-mix(in srgb, var(--control-color) 88%, transparent);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
 
     /* Styling - More prominent border and glow */
-    border: 2px solid rgba(99, 102, 241, 0.6);
+    border: 2px solid var(--accent-border);
     border-radius: 50px;
     padding: 0 1.5rem;
 
     /* Shadows and glow - More visible */
     box-shadow:
-        inset 0 1px 2px 0 rgba(255, 255, 255, 0.08),
-        inset 0 -1px 2px 0 rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(99, 102, 241, 0.2),
-        0 10px 40px -10px rgba(99, 102, 241, 0.3),
-        0 0 25px -5px rgba(99, 102, 241, 0.2);
+        inset 0 1px 2px 0 color-mix(in srgb, var(--surface-color) 70%, transparent),
+        0 10px 30px -14px rgba(99, 102, 241, 0.45);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .search-wrapper:hover {
-    border-color: rgba(99, 102, 241, 0.8);
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(39, 51, 76, 0.85) 100%);
+    border-color: var(--accent-color);
+    background: var(--control-color);
     box-shadow:
-        inset 0 1px 2px 0 rgba(255, 255, 255, 0.1),
-        inset 0 -1px 2px 0 rgba(0, 0, 0, 0.4),
-        0 0 0 1px rgba(99, 102, 241, 0.3),
-        0 15px 50px -10px rgba(99, 102, 241, 0.4),
-        0 0 35px -5px rgba(99, 102, 241, 0.3);
+        0 12px 34px -16px rgba(99, 102, 241, 0.5);
 }
 
 .search-wrapper:focus-within {
-    border-color: rgba(99, 102, 241, 1);
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(39, 51, 76, 0.9) 100%);
+    border-color: var(--accent-color);
+    background: var(--control-color);
     box-shadow:
-        inset 0 1px 3px 0 rgba(99, 102, 241, 0.15),
-        inset 0 -1px 2px 0 rgba(0, 0, 0, 0.5),
-        0 0 0 2px rgba(99, 102, 241, 0.4),
-        0 20px 60px -10px rgba(99, 102, 241, 0.5),
-        0 0 50px -5px rgba(99, 102, 241, 0.35);
+        0 0 0 3px var(--accent-soft),
+        0 20px 46px -24px rgba(99, 102, 241, 0.6);
     animation: searchGlow 3s ease-in-out infinite;
 }
 
@@ -455,7 +522,7 @@ body {
     align-items: center;
     justify-content: center;
     margin-right: 0.75rem;
-    color: rgba(99, 102, 241, 0.8);
+    color: var(--accent-color);
     flex-shrink: 0;
 }
 
@@ -465,7 +532,7 @@ body {
 }
 
 .search-wrapper:focus-within .search-icon {
-    color: rgba(99, 102, 241, 1);
+    color: var(--accent-color);
     transform: scale(1.1);
 }
 
@@ -484,7 +551,7 @@ body {
 }
 
 .search-input::placeholder {
-    color: rgba(148, 163, 184, 0.6);
+    color: var(--text-secondary);
     font-weight: 400;
 }
 
@@ -512,14 +579,14 @@ body {
 }
 
 .search-shortcut kbd {
-    background: rgba(99, 102, 241, 0.25);
-    border: 1px solid rgba(99, 102, 241, 0.5);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-border);
     border-radius: 6px;
     padding: 0.35rem 0.6rem;
     font-family: 'Courier New', monospace;
     font-size: 0.8rem;
     font-weight: 600;
-    color: rgba(99, 102, 241, 0.9);
+    color: var(--accent-color);
     box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -588,15 +655,14 @@ body {
     width: calc(100% + 4rem);
     max-width: 600px;
     margin-top: 0.75rem;
-    background: rgba(15, 23, 42, 0.95);
+    background: color-mix(in srgb, var(--surface-color) 94%, transparent);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    border: 2px solid rgba(99, 102, 241, 0.3);
+    border: 2px solid var(--accent-border);
     border-radius: 20px;
     box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.5),
-        0 0 40px rgba(99, 102, 241, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        var(--shadow-modal),
+        0 0 36px rgba(99, 102, 241, 0.08);
     z-index: 1000;
     animation: dropdownSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -890,7 +956,7 @@ body {
 .tab.active {
     background: var(--accent-color);
     border-color: var(--accent-color);
-    color: white;
+    color: var(--on-accent);
     box-shadow: 0 4px 14px rgba(124, 92, 255, 0.35);
 }
 
@@ -916,7 +982,7 @@ body {
 .btn-random-project {
     background: var(--accent-color);
     border: 1px solid var(--accent-color);
-    color: white;
+    color: var(--on-accent);
     padding: 0.75rem 1.5rem;
     border-radius: 50px;
     cursor: pointer;
@@ -991,8 +1057,8 @@ body {
     border-radius: 24px;
     text-align: center;
     /* Tinted colorful border instead of grey */
-    border: 2px solid rgba(99, 102, 241, 0.15); 
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+    border: 2px solid var(--accent-border); 
+    box-shadow: var(--shadow);
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     cursor: pointer;
     overflow: hidden;
@@ -1092,7 +1158,7 @@ body {
 
 .project-card:hover .btn-play {
     background: var(--accent-color);
-    color: white;
+    color: var(--on-accent);
     border-color: transparent;
     box-shadow: 0 8px 20px rgba(124, 92, 255, 0.4);
 }
@@ -1107,7 +1173,7 @@ body {
 
 .btn-generate {
     background: var(--accent-color);
-    color: white;
+    color: var(--on-accent);
     border: none;
     padding: 0.75rem 2rem;
     border-radius: 50px;
@@ -1130,7 +1196,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(15, 23, 42, 0.72);
+    background: var(--overlay-color);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     z-index: 2000;
@@ -1162,7 +1228,7 @@ body {
     top: 1rem;
     right: 1rem;
     background: var(--danger-color);
-    color: white;
+    color: var(--on-accent);
     border: none;
     width: 40px;
     height: 40px;
@@ -1209,7 +1275,7 @@ body {
     border: none;
     border-radius: 50%;
     background: var(--accent-color);
-    color: white;
+    color: var(--on-accent);
     box-shadow: var(--shadow);
     cursor: pointer;
     display: grid;
@@ -1581,7 +1647,7 @@ body {
 
     background: var(--accent-color);
     border-color: var(--accent-color);
-    color: white;
+    color: var(--on-accent);
     box-shadow: 0 4px 14px rgba(124, 92, 255, 0.35);
     padding: 0.9rem 1.4rem;
     border-radius: 5px;
@@ -1682,7 +1748,7 @@ body {
 
 .footer-social-icons a:hover {
     background: var(--accent-color);
-    color: white;
+    color: var(--on-accent);
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(124, 92, 255, 0.3);
 }
@@ -1778,7 +1844,7 @@ body {
     border-radius: 50%;
     border: none;
     background: var(--accent-color);
-    color: white;
+    color: var(--on-accent);
     cursor: pointer;
     display: flex;
     align-items: center;
