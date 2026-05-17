@@ -37,7 +37,7 @@ html {
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
     background: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
@@ -75,21 +75,37 @@ body {
 .logo h1 {
     font-size: 1.5rem;
     color: #e0e7ff;
-    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-family: 'IBM Plex Mono', monospace;
     font-weight: 600;
     letter-spacing: 0.5px;
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    align-items: baseline;
+    gap: 0;
+    margin: 0;
 }
 
-.logo h1 code {
-    background: none;
-    border: none;
-    padding: 0;
-    color: #10b981;
+.logo-py {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: #cbd5e1;
+    letter-spacing: 0.02em;
+}
+
+.logo-mini {
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
-    box-shadow: none;
+    font-size: 1.3rem;
+    color: #e0e7ff;
+    margin: 0 0.15rem;
+}
+
+.logo-parens {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    color: #6366f1;
+    font-size: 1.1rem;
+    margin-left: 0.1rem;
 }
 
 .nav-controls {
